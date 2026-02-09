@@ -1,0 +1,35 @@
+name: Build and deploy Static Web App
+
+on:
+  push:
+    branches: [ main ]   # ← あなたの既定ブランチに合わせる
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [ main ]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # （SPA をビルドする場合）必要なら Node をセットアップして build
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
+      # - run: npm ci && npm run build
+      #   working-directory: ./  # ← SPAのプロジェクト直下に合わせる
+
+      - name: Build And Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          # ここが超重要（あなたのレイアウトに合わせて指定）
+          app_location: "/"          # 例：SPA がルートにある場合
+          api_location: "api"        # ★ 必須：Functions を配下から拾う
+          output_location: "/"       # 例：ビルド成果の相対パス（SPAで dist なら "dist"）
+          ####
+          # app_location/output_location は以下のルール：
+          #  - 静的ファイルを最終的に配信するフォルダ（ビルド成果物）を output_location に
+          #  - SPA のソース直下を app_location に（ビルドしない静的サイトなら output="/" でも可）
+          ####
