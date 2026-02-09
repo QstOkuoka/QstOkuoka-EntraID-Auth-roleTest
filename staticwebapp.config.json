@@ -23,4 +23,3 @@
 
   "navigationFallback": { "rewrite": "/index.html", "exclude": ["/.auth/*"] }
 }
-``
