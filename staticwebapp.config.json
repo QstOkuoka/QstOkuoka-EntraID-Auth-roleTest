@@ -1,6 +1,6 @@
 {
   "auth": {
-     "identityProviders": {
+    "identityProviders": {
       "azureActiveDirectory": {
         "registration": {
           "openIdIssuer": "https://login.microsoftonline.com/c250b49b-1499-43d9-9492-f177a01b796b/v2.0",
@@ -9,11 +9,21 @@
         }
       }
     }
-  }, 
+  },
+
   "routes": [
     { "route": "/.auth/*", "allowedRoles": ["anonymous", "authenticated"] },
     { "route": "/admin.html", "allowedRoles": ["Admin"] },
     { "route": "/user.html",  "allowedRoles": ["User", "Admin"] },
     { "route": "/*", "allowedRoles": ["authenticated"] }
-  ]
+  ],
+
+  // ★ 未ログインを AAD ログインへリダイレクト
+  "responseOverrides": {
+    "401": { "statusCode": 302, "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer" }
+  },
+
+  // ★ /.auth は SPA の index.html に書き換えない
+  "navigationFallback": { "rewrite": "/index.html", "exclude": ["/.auth/*"] }
 }
+``
