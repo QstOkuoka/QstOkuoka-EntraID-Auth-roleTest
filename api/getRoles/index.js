@@ -1,7 +1,4 @@
 
 module.exports = async function (context, req) {
-  context.res = {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-    body: { roles: ["Admin"] }
-  }
+  context.res = { status: 200, body: { roles: ["Admin"] } };
+};
