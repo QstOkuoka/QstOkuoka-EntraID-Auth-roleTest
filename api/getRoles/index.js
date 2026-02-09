@@ -1,8 +1,17 @@
+const rolesFromEntra = req.body.claims
+  .filter(c => c.typ === "roles")
+  .map(c => c.val);
 
-module.exports = async function (context, req) {
-  context.res = {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-    body: { roles: ["Admin"] }
-  };
+const roles = [];
+if (rolesFromEntra.includes("Admin")) {
+  roles.push("Admin");
+}
+if (rolesFromEntra.includes("User")) {
+  roles.push("User");
+}
+
+context.res = {
+  status: 200,
+  body: { roles }
 };
+``
