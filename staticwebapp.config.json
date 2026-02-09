@@ -1,1 +1,14 @@
-{"$schema":"https://json.schemastore.org/staticwebapp.config.json","routes":[{"route":"/.auth/*","allowedRoles":["anonymous","authenticated"]},{"route":"/admin.html","allowedRoles":["Admin"]},{"route":"/user.html","allowedRoles":["User","Admin"]},{"route":"/*","allowedRoles":["authenticated"]}],"responseOverrides":{"401":{"statusCode":302,"redirect":"/.auth/login/aad"},"403":{"statusCode":302,"redirect":"/forbidden.html"}},"navigationFallback":{"rewrite":"/index.html","exclude":["/.auth/*"]}}
+{
+  "auth": {
+    "rolesSource": "/api/getRoles",
+    "identityProviders": {
+      "azureActiveDirectory": {
+        "registration": {
+          "openIdIssuer": "https://login.microsoftonline.com/c250b49b-1499-43d9-9492-f177a01b796b/v2.0",
+          "clientIdSettingName": "AZURE_CLIENT_ID",
+          "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+        }
+      }
+    }
+  }
+}
