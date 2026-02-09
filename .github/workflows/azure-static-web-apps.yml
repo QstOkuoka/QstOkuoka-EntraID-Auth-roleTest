@@ -21,15 +21,9 @@ jobs:
       #   working-directory: ./  # ← SPAのプロジェクト直下に合わせる
 
       - name: Build And Deploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          # ここが超重要（あなたのレイアウトに合わせて指定）
-          app_location: "/"          # 例：SPA がルートにある場合
-          api_location: "api"        # ★ 必須：Functions を配下から拾う
-          output_location: "/"       # 例：ビルド成果の相対パス（SPAで dist なら "dist"）
-          ####
-          # app_location/output_location は以下のルール：
-          #  - 静的ファイルを最終的に配信するフォルダ（ビルド成果物）を output_location に
-          #  - SPA のソース直下を app_location に（ビルドしない静的サイトなら output="/" でも可）
-          ####
+uses: Azure/static-web-apps-deploy@v1
+  with:
+    azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+    app_location: "/"      # ← SPAの場所
+    api_location: "api"    # ← ★ Functions の場所（ここが最重要）
+    output_location: "/"   # ← ビルド成果（SPAなら 'dist' など）
