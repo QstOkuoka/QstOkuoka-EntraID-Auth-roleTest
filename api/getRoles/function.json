@@ -1,13 +1,7 @@
+// api/getRoles/function.json
 {
   "bindings": [
-    {
-      "authLevel": "anonymous",
-      "type": "httpTrigger",
-      "direction": "in",
-      "name": "req",
-      "methods": ["get","post"],
-      "route": "getRoles"
-    },
+    { "authLevel": "anonymous", "type": "httpTrigger", "direction": "in", "name": "req", "methods": ["post"], "route": "getRoles" },
     { "type": "http", "direction": "out", "name": "res" }
   ]
 }
