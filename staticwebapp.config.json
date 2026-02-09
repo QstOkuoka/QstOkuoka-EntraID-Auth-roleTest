@@ -16,13 +16,11 @@
     { "route": "/user.html",  "allowedRoles": ["User", "Admin"] },
     { "route": "/*", "allowedRoles": ["authenticated"] }
   ],
-
-  // ★ 未ログインを AAD ログインへリダイレクト
+  
   "responseOverrides": {
     "401": { "statusCode": 302, "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer" }
   },
 
-  // ★ /.auth は SPA の index.html に書き換えない
   "navigationFallback": { "rewrite": "/index.html", "exclude": ["/.auth/*"] }
 }
 ``
