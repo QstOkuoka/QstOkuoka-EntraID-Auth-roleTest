@@ -44,3 +44,11 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_TREE_0A3CFE600 }}
           action: "close"
+
+- uses: Azure/static-web-apps-deploy@v1
+  with:
+    azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+    app_location: "/"      # ← SPAの場所
+    api_location: "api"    # ← ★ Functions の場所（ここが最重要）
+    output_location: "/"   # ← ビルド成果（SPAなら 'dist' など）
+
