@@ -14,7 +14,8 @@
   "routes": [
     { "route": "/.auth/*", "allowedRoles": ["anonymous", "authenticated"] },
     { "route": "/admin.html", "allowedRoles": ["Admin"] },
-    { "route": "/user.html",  "allowedRoles": ["User", "Admin"] },
+    { "route": "/user.html",  "allowedRoles": ["User"] },
+    { "route": "/both.html",  "allowedRoles": ["User","Admin"] },
     { "route": "/*", "allowedRoles": ["authenticated"] }
   ],
   
